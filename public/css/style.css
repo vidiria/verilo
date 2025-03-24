@@ -99,10 +99,6 @@ body::before {
   font-family: 'Sora', sans-serif;
 }
 
-.logo-text::before {
-  content: 'VAV: ';
-}
-
 /* Logo com gradiente animado e linhas neuras */
 .logo-container::after {
   content: '';
@@ -110,6 +106,13 @@ body::before {
   height: 32px;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%237a7a7e;stop-opacity:1" /><stop offset="100%" style="stop-color:%23ececef;stop-opacity:1" /></linearGradient></defs><path d="M20 20 L40 80 M40 80 L60 20 M60 20 L80 80 M20 20 L40 20 M60 80 L80 80" stroke="url(#grad)" stroke-width="4" fill="none" stroke-dasharray="200" stroke-dashoffset="200" class="neura-lines"/><circle cx="20" cy="20" r="4" fill="%237a7a7e"/><circle cx="80" cy="80" r="4" fill="%237a7a7e"/><circle cx="40" cy="80" r="4" fill="%237a7a7e"/><circle cx="60" cy="20" r="4" fill="%237a7a7e"/></svg>') no-repeat center;
   background-size: contain;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .neura-lines {
@@ -236,30 +239,6 @@ body::before {
 
 .sidebar.open {
   left: 8px;
-}
-
-.new-chat-btn {
-  margin: 12px;
-  padding: 8px 16px;
-  border-radius: 12px;
-  background: var(--glass-bg);
-  color: var(--primary-color);
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
-}
-
-.new-chat-btn:hover {
-  background: var(--hover-color);
-  transform: translateY(-2px);
-  box-shadow: var(--glow);
 }
 
 .sidebar-header {
@@ -444,31 +423,6 @@ body::before {
   color: var(--text-secondary);
 }
 
-.penseira-button {
-  margin: 12px;
-  padding: 8px 16px;
-  border-radius: 12px;
-  background: var(--glass-bg);
-  color: var(--primary-color);
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
-  margin-top: auto;
-}
-
-.penseira-button:hover {
-  background: var(--hover-color);
-  transform: translateY(-2px);
-  box-shadow: var(--glow);
-}
-
 /* Chat Area */
 .chat-area {
   flex: 1;
@@ -499,29 +453,9 @@ body::before {
   font-family: 'Sora', sans-serif;
 }
 
-.chat-model-tag {
-  display: none; /* Removendo redundância de Claude 3.7 */
-}
-
 .chat-actions {
   display: flex;
   gap: 6px;
-}
-
-.chat-action {
-  width: 24px;
-  height: 24px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.chat-action:hover {
-  filter: brightness(1.2);
-  box-shadow: var(--glow);
 }
 
 .lousa-button {
@@ -701,10 +635,6 @@ body::before {
   font-family: 'Sora', sans-serif;
 }
 
-.artifact-actions {
-  display: none; /* Removendo ícone de download */
-}
-
 .artifact-content {
   padding: 8px;
   font-size: 13px;
@@ -761,6 +691,7 @@ body::before {
   border-radius: 16px;
   box-shadow: var(--shadow);
   margin: 0 8px 8px;
+  position: relative;
 }
 
 .input-tools {
@@ -774,11 +705,6 @@ body::before {
 
 .input-tools::-webkit-scrollbar {
   display: none;
-}
-
-.tool-group {
-  display: flex;
-  gap: 6px;
 }
 
 .tool-button {
@@ -800,6 +726,44 @@ body::before {
 
 .tool-button:focus {
   box-shadow: var(--outline-focus);
+}
+
+.attach-menu {
+  position: absolute;
+  bottom: 60px;
+  left: 12px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  z-index: 10;
+}
+
+.attach-menu.open {
+  display: flex;
+  animation: slideIn 0.3s ease;
+}
+
+.attach-option {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.attach-option:hover {
+  background: var(--hover-color);
+  transform: translateY(-2px);
 }
 
 .tool-button.whisper::before {
@@ -1035,107 +999,6 @@ body::before {
   box-shadow: var(--outline-focus);
 }
 
-/* Penseira Modal */
-.penseira-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.1);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-
-.penseira-modal.open {
-  display: flex;
-}
-
-.modal-content {
-  width: 90%;
-  max-width: 400px;
-  max-height: 80vh;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header {
-  padding: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-title {
-  font-size: 15px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'Sora', sans-serif;
-}
-
-.close-modal {
-  width: 24px;
-  height: 24px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.close-modal:hover {
-  filter: brightness(1.2);
-  box-shadow: var(--glow);
-}
-
-.close-modal:focus {
-  box-shadow: var(--outline-focus);
-}
-
-.modal-body {
-  padding: 12px;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.memory-card {
-  padding: 12px;
-  border-radius: 14px;
-  background: var(--glass-bg);
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
-  animation: float 5s infinite ease-in-out;
-}
-
-.memory-card:hover {
-  background: var(--hover-color);
-  transform: translateY(-2px);
-}
-
-.memory-title {
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  font-family: 'Sora', sans-serif;
-}
-
-.memory-content {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
 /* Mobile Menu Button */
 .mobile-menu-button {
   display: flex;
@@ -1204,168 +1067,6 @@ body::before {
 
 .voice-selector:focus {
   box-shadow: var(--outline-focus);
-}
-
-/* Notificações */
-.notification {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  padding: 8px 12px;
-  border-radius: 14px;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 500;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.7);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow);
-  animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
-}
-
-.notification.info,
-.notification.success,
-.notification.warning,
-.notification.error {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-/* Connection Status */
-.connection-status {
-  position: fixed;
-  top: 8px;
-  right: 8px;
-  padding: 4px 10px;
-  border-radius: 14px;
-  font-size: 11px;
-  font-weight: 500;
-  z-index: 1000;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow);
-  transition: opacity 0.4s ease;
-}
-
-.connection-status.online,
-.connection-status.offline {
-  color: var(--text-secondary);
-}
-
-.connection-status.fade-out {
-  opacity: 0;
-}
-
-/* Progress Overlay */
-.progress-overlay {
-  position: fixed;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  color: var(--text-color);
-  padding: 6px 10px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: var(--shadow);
-  z-index: 1000;
-}
-
-.progress-bar {
-  width: 60px;
-  height: 3px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--primary-color);
-  width: 0%;
-  transition: width 0.3s ease;
-}
-
-/* Voice Animation */
-.voice-animation {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: 40px;
-  gap: 3px;
-  margin-bottom: 8px;
-}
-
-.voice-bar {
-  width: 6px;
-  height: 12px;
-  background: var(--primary-color);
-  border-radius: 2px;
-  animation: voice-animation 0.4s infinite alternate;
-}
-
-.voice-bar:nth-child(2) { animation-delay: 0.1s; }
-.voice-bar:nth-child(3) { animation-delay: 0.2s; }
-.voice-bar:nth-child(4) { animation-delay: 0.3s; }
-
-@keyframes voice-animation {
-  0% { height: 6px; }
-  100% { height: 24px; }
-}
-
-.voice-timer {
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-color);
-  margin-bottom: 8px;
-}
-
-.voice-controls {
-  display: flex;
-  gap: 6px;
-}
-
-.voice-controls button {
-  flex: 1;
-  padding: 6px 0;
-  border-radius: 12px;
-  background: transparent;
-  border: none;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.voice-controls button:hover {
-  filter: brightness(1.2);
-  box-shadow: var(--glow);
-}
-
-.voice-controls button:focus {
-  box-shadow: var(--outline-focus);
-}
-
-.voice-stop-btn::before {
-  content: '…';
-  color: var(--text-secondary);
-  font-size: 12px;
-}
-
-.voice-cancel-btn::before {
-  content: '…';
-  color: var(--text-secondary);
-  font-size: 12px;
 }
 
 /* Recording Modal */
@@ -1573,11 +1274,6 @@ body::before {
     box-shadow: var(--outline-focus);
   }
 
-  .advanced-toggle::before {
-    content: 'think+';
-    font-family: 'Sora', sans-serif;
-  }
-
   .user-menu {
     padding: 6px 12px;
     gap: 6px;
@@ -1600,13 +1296,6 @@ body::before {
     top: 16px;
     bottom: 16px;
     margin-right: 8px;
-  }
-
-  .new-chat-btn {
-    margin: 20px;
-    padding: 10px 20px;
-    font-size: 14px;
-    gap: 6px;
   }
 
   .sidebar-header {
@@ -1667,15 +1356,9 @@ body::before {
     font-size: 11px;
   }
 
-  .penseira-button {
-    margin: 20px;
-    padding: 10px 20px;
-    font-size: 14px;
-    gap: 6px;
-  }
-
   .chat-area {
     margin: 0 0 0 8px;
+    flex: 1;
   }
 
   .chat-header {
@@ -1686,11 +1369,6 @@ body::before {
   .chat-title {
     font-size: 17px;
     gap: 8px;
-  }
-
-  .chat-action {
-    width: 28px;
-    height: 28px;
   }
 
   .lousa-button {
@@ -1783,17 +1461,13 @@ body::before {
     margin-bottom: 12px;
   }
 
-  .tool-group {
-    gap: 8px;
-  }
-
   .tool-button {
     padding: 6px 10px;
   }
 
-  .tool-button::before {
-    width: 16px;
-    height: 16px;
+  .attach-menu {
+    bottom: 70px;
+    left: 20px;
   }
 
   .message-input {
@@ -1865,43 +1539,6 @@ body::before {
     font-size: 14px;
   }
 
-  .modal-content {
-    max-width: 600px;
-    max-height: 90vh;
-  }
-
-  .modal-header {
-    padding: 16px 20px;
-  }
-
-  .modal-title {
-    font-size: 17px;
-    gap: 8px;
-  }
-
-  .close-modal {
-    width: 28px;
-    height: 28px;
-  }
-
-  .modal-body {
-    padding: 20px;
-  }
-
-  .memory-card {
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-
-  .memory-title {
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-
-  .memory-content {
-    font-size: 13px;
-  }
-
   .mobile-menu-button {
     display: none;
   }
@@ -1910,55 +1547,6 @@ body::before {
     padding: 6px 10px;
     font-size: 13px;
     margin-right: 8px;
-  }
-
-  .notification {
-    top: 16px;
-    right: 16px;
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-
-  .connection-status {
-    top: 10px;
-    right: 10px;
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-
-  .progress-overlay {
-    bottom: 16px;
-    padding: 8px 12px;
-    gap: 8px;
-  }
-
-  .progress-bar {
-    width: 80px;
-    height: 4px;
-  }
-
-  .voice-animation {
-    height: 50px;
-    gap: 4px;
-    margin-bottom: 12px;
-  }
-
-  .voice-bar {
-    width: 8px;
-    height: 16px;
-  }
-
-  .voice-timer {
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
-
-  .voice-controls {
-    gap: 8px;
-  }
-
-  .voice-controls button {
-    padding: 8px 0;
   }
 
   .recording-modal-content {
@@ -2018,10 +1606,10 @@ button,
 
 /* Removendo tooltips indesejados */
 [title] {
-  tooltip: none; /* Desativando tooltips padrão */
+  tooltip: none;
 }
 
 *:hover::after,
 *:hover::before {
-  content: none !important; /* Removendo pseudo-elementos que podem causar tooltips */
+  content: none !important;
 }
