@@ -85,7 +85,9 @@ body::before {
 }
 
 .logo {
-  display: none; /* Removendo o ícone do logo */
+  display: block; /* Exibindo o logo até você adicionar o novo */
+  width: 32px;
+  height: 32px;
 }
 
 .logo-text {
@@ -138,6 +140,29 @@ body::before {
 
 .model-dropdown:focus {
   outline: none;
+  box-shadow: var(--outline-focus);
+}
+
+.advanced-toggle {
+  display: flex;
+  margin-left: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: transparent;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.advanced-toggle:hover {
+  filter: brightness(1.2);
+  box-shadow: var(--glow);
+}
+
+.advanced-toggle.active {
+  color: var(--primary-color);
+}
+
+.advanced-toggle:focus {
   box-shadow: var(--outline-focus);
 }
 
@@ -229,10 +254,6 @@ body::before {
   gap: 4px;
   box-shadow: var(--shadow);
   transition: all 0.3s ease;
-}
-
-.new-chat-btn::before {
-  content: '…';
 }
 
 .new-chat-btn:hover {
@@ -761,7 +782,7 @@ body::before {
 }
 
 .tool-button {
-  padding: 4px;
+  padding: 4px 8px; /* Adicionado padding para melhor clique */
   border-radius: 12px;
   background: transparent;
   border: none;
@@ -770,10 +791,6 @@ body::before {
   gap: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.tool-button:not(.whisper) {
-  display: none; /* Removendo todos os botões exceto o microfone */
 }
 
 .tool-button:hover {
@@ -1482,6 +1499,11 @@ body::before {
     margin: 16px 16px 8px;
   }
 
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
   .logo-text {
     font-size: 18px;
   }
@@ -1552,7 +1574,7 @@ body::before {
   }
 
   .advanced-toggle::before {
-    content: 'Think+';
+    content: 'think+';
     font-family: 'Sora', sans-serif;
   }
 
@@ -1762,7 +1784,7 @@ body::before {
   }
 
   .tool-button {
-    padding: 6px;
+    padding: 6px 10px;
   }
 
   .tool-button::before {
@@ -1945,43 +1967,58 @@ body::before {
     margin-bottom: 16px;
   }
 
-  .recording-animation {
-    height: 80px;
-    margin-bottom: 16px;
+    /* Continuação dos ajustes para desktop */
+    .recording-animation {
+      height: 80px;
+      margin-bottom: 16px;
+    }
+
+    .recording-wave {
+      width: 4px;
+      height: 32px;
+      margin: 0 3px;
+    }
+
+    .recording-wave:nth-child(2) {
+      animation-delay: 0.2s;
+      height: 40px;
+    }
+
+    .recording-wave:nth-child(3) {
+      animation-delay: 0.4s;
+      height: 56px;
+    }
+
+    .recording-timer {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .recording-controls {
+      gap: 12px;
+    }
+
+    .recording-controls button {
+      padding: 10px 0;
+      font-size: 14px;
+    }
   }
 
-  .recording-wave {
-    width: 4px;
-    height: 32px;
-    margin: 0 3px;
+  /* Soft Transitions */
+  .message,
+  .conversation-item,
+  .message-bubble,
+  button,
+  .tool-button {
+    transition: all 0.3s ease;
   }
 
-  .recording-timer {
-    font-size: 24px;
-    margin-bottom: 16px;
+  /* Removendo tooltips indesejados */
+  [title] {
+    tooltip: none; /* Desativando tooltips padrão */
   }
 
-  .recording-controls {
-    gap: 12px;
+  *:hover::after,
+  *:hover::before {
+    content: none !important; /* Removendo pseudo-elementos que podem causar tooltips */
   }
-
-  .recording-controls button {
-    padding: 10px 0;
-    font-size: 14px;
-  }
-}
-
-/* Soft Transitions */
-.message, .conversation-item, .message-bubble, button, .tool-button {
-  transition: all 0.3s ease;
-}
-
-/* Removendo tooltips indesejados */
-[title] {
-  tooltip: none; /* Desativando tooltips padrão */
-}
-
-*:hover::after,
-*:hover::before {
-  content: none !important; /* Removendo pseudo-elementos que podem causar tooltips */
-}
