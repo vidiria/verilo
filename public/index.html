@@ -48,13 +48,6 @@
   <div class="main-content">
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-      <button class="new-chat-btn" id="newChatBtn">
-        <svg class="new-chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-          <path d="M12 5v14M5 12h14"></path>
-        </svg>
-        +conversa
-      </button>
-      
       <div class="sidebar-header">
         <div class="sidebar-title">organização</div>
         <div class="sidebar-action">
@@ -76,13 +69,6 @@
       <div class="projects-list" id="projectsList">
         <!-- Projetos serão adicionados dinamicamente aqui -->
       </div>
-      
-      <button class="penseira-button" id="penseiraButton">
-        <svg class="penseira-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 11.5A8.38 8.38 0 0 1 20.1 15.3a8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 8.7 3.9 8.38 8.38 0 0 1 12.5 3h.5a8.48 8.48 0 0 1 6 2.5 8.48 8.48 0 0 1 2.5 6v.5Z"></path>
-        </svg>
-        memória
-      </button>
     </div>
     
     <!-- Chat Area -->
@@ -108,19 +94,6 @@
             </svg>
             canva
           </button>
-          <div class="chat-action">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="8 17 12 21 16 17"></polyline>
-              <line x1="12" y1="12" x2="12" y2="21"></line>
-              <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path>
-            </svg>
-          </div>
-          <div class="chat-action">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-            </svg>
-          </div>
         </div>
       </div>
       
@@ -130,24 +103,28 @@
       
       <div class="input-area">
         <div class="input-tools">
-          <div class="tool-group">
-            <!-- Botão de anexar genérico -->
-            <button class="tool-button attach-btn" id="attachBtn">
+          <button class="tool-button attach-btn" id="attachBtn">
+            <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+            </svg>
+            anexar
+          </button>
+          
+          <div class="attach-menu" id="attachMenu">
+            <button class="attach-option" id="fileOption">
               <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
               </svg>
-              anexar
+              anexar arquivo
             </button>
-            <!-- Botão para tirar foto -->
-            <button class="tool-button camera-btn" id="cameraBtn">
+            <button class="attach-option" id="cameraOption">
               <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                 <circle cx="12" cy="13" r="4"></circle>
               </svg>
               tirar foto
             </button>
-            <!-- Botão para escolher da galeria -->
-            <button class="tool-button gallery-btn" id="galleryBtn">
+            <button class="attach-option" id="galleryOption">
               <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
@@ -232,30 +209,6 @@
     </div>
   </div>
   
-  <!-- Penseira Modal -->
-  <div class="penseira-modal" id="penseiraModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-title">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 11.5A8.38 8.38 0 0 1 20.1 15.3a8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 8.7 3.9 8.38 8.38 0 0 1 12.5 3h.5a8.48 8.48 0 0 1 6 2.5 8.48 8.48 0 0 1 2.5 6v.5Z"></path>
-          </svg>
-          memória
-        </div>
-        <div class="close-modal" id="closeModal">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </div>
-      </div>
-      
-      <div class="modal-body" id="penseiraContent">
-        <!-- Memórias da Penseira serão adicionadas aqui dinamicamente -->
-      </div>
-    </div>
-  </div>
-  
   <!-- Modal de Gravação -->
   <div id="recordingModal" class="recording-modal">
     <div class="recording-modal-content">
@@ -282,6 +235,43 @@
   <script src="js/ui.js"></script>
   <script src="js/chat.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    // JavaScript para o menu flutuante de anexar
+    const attachBtn = document.getElementById('attachBtn');
+    const attachMenu = document.getElementById('attachMenu');
+    const fileOption = document.getElementById('fileOption');
+    const cameraOption = document.getElementById('cameraOption');
+    const galleryOption = document.getElementById('galleryOption');
+    const fileInput = document.getElementById('fileInput');
+    const cameraInput = document.getElementById('cameraInput');
+    const galleryInput = document.getElementById('galleryInput');
+
+    attachBtn.addEventListener('click', () => {
+      attachMenu.classList.toggle('open');
+    });
+
+    fileOption.addEventListener('click', () => {
+      fileInput.click();
+      attachMenu.classList.remove('open');
+    });
+
+    cameraOption.addEventListener('click', () => {
+      cameraInput.click();
+      attachMenu.classList.remove('open');
+    });
+
+    galleryOption.addEventListener('click', () => {
+      galleryInput.click();
+      attachMenu.classList.remove('open');
+    });
+
+    // Fechar o menu flutuante ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!attachBtn.contains(e.target) && !attachMenu.contains(e.target)) {
+        attachMenu.classList.remove('open');
+      }
+    });
+  </script>
   
 </body>
 </html>
