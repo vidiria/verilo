@@ -1,5 +1,5 @@
 :root {
-  /* Paleta ajustada para mais suavidade */
+  /* Paleta ajustada para suavidade */
   --bg-color: rgba(245, 245, 247, 0.9);
   --text-color: #2a2a2e;
   --text-secondary: #7a7a7e;
@@ -8,6 +8,7 @@
   --primary-color: #3a3a3e;
   --accent-color: #7a7a7e;
   --shadow: 0 6px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --focus-glow: 0 0 8px rgba(122, 122, 126, 0.3); /* Contorno sutil ao focar */
   
   /* Dimensões */
   --header-height: 56px;
@@ -18,10 +19,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
 
-/* Fundo com "balançar" sutil */
+/* Fundo com "respiração" suave */
 body {
   background: linear-gradient(135deg, #f5f5f7, #ececef);
   color: var(--text-color);
@@ -41,18 +42,17 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1), transparent 50%),
-              radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1), transparent 50%);
-  animation: sway 15s infinite ease-in-out;
+  background: rgba(255, 255, 255, 0.1);
+  animation: breathe 12s infinite ease-in-out;
   z-index: -1;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
-@keyframes sway {
-  0% { transform: translate(0, 0); opacity: 0.8; }
-  50% { transform: translate(10px, -10px); opacity: 1; }
-  100% { transform: translate(0, 0); opacity: 0.8; }
+@keyframes breathe {
+  0% { opacity: 0.3; background: rgba(255, 255, 255, 0.1); }
+  50% { opacity: 0.6; background: rgba(255, 255, 255, 0.3); }
+  100% { opacity: 0.3; background: rgba(255, 255, 255, 0.1); }
 }
 
 .desktop-only {
@@ -73,7 +73,7 @@ body::before {
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow);
-  border-radius: 16px; /* Bordas mais fluidas */
+  border-radius: 16px;
   margin: 8px;
 }
 
@@ -97,6 +97,7 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--primary-color);
+  font-family: 'Sora', sans-serif;
 }
 
 .models-selector {
@@ -112,20 +113,12 @@ body::before {
   font-size: 12px;
   color: var(--text-color);
   box-shadow: var(--shadow);
-  position: relative;
+  transition: all 0.3s ease;
 }
 
-.model-dropdown::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  animation: sparkle 3s infinite ease-in-out;
+.model-dropdown:focus {
+  box-shadow: var(--focus-glow);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .user-menu {
@@ -167,7 +160,6 @@ body::before {
   top: -2px;
   right: -2px;
   border: 1px solid var(--glass-bg);
-  animation: nodePulse 2s infinite ease-in-out;
 }
 
 /* Main Content */
@@ -246,7 +238,6 @@ body::before {
   height: 14px;
   border-radius: 50%;
   background: var(--accent-color);
-  animation: nodePulse 2s infinite ease-in-out;
 }
 
 .sidebar-header {
@@ -259,6 +250,7 @@ body::before {
 .sidebar-title {
   font-size: 14px;
   font-weight: 600;
+  font-family: 'Sora', sans-serif;
 }
 
 .sidebar-tabs {
@@ -358,7 +350,6 @@ body::before {
   background: var(--accent-color);
   top: -2px;
   right: -2px;
-  animation: nodePulse 2s infinite ease-in-out;
 }
 
 .conversation-content {
@@ -476,7 +467,6 @@ body::before {
   height: 14px;
   border-radius: 50%;
   background: var(--accent-color);
-  animation: nodePulse 2s infinite ease-in-out;
 }
 
 /* Chat Area */
@@ -506,6 +496,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-family: 'Sora', sans-serif;
 }
 
 .chat-model-tag {
@@ -642,7 +633,6 @@ body::before {
   background: var(--accent-color);
   top: -2px;
   right: -2px;
-  animation: nodePulse 2s infinite ease-in-out;
 }
 
 .message.assistant .message-avatar {
@@ -828,59 +818,49 @@ body::before {
 }
 
 .tool-button {
-  padding: 4px 8px;
+  padding: 4px;
   border-radius: 12px;
-  background: var(--glass-bg);
+  background: transparent;
   border: none;
-  font-size: 12px;
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
   cursor: pointer;
-  box-shadow: var(--shadow);
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
 }
 
 .tool-button:hover {
-  background: var(--hover-color);
-  transform: translateY(-2px);
+  filter: brightness(1.5);
 }
 
-.tool-button::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  animation: sparkle 3s infinite ease-in-out;
+.tool-button:focus {
+  box-shadow: var(--focus-glow);
 }
 
-.tool-button.mode-advanced {
+.tool-button.mode-advanced::before {
+  content: '⚡'; /* Ícone para Think+ */
+  font-size: 16px;
   color: var(--primary-color);
+}
+
+.tool-button.mode-advanced.active::before {
+  color: #ffffff;
 }
 
 .tool-button.mode-advanced.active {
   background: var(--primary-color);
-  color: #ffffff;
 }
 
-.tool-button.whisper {
-  background: var(--glass-bg);
+.tool-button.whisper::before {
+  content: '🎙️'; /* Ícone de microfone */
+  font-size: 16px;
   color: var(--primary-color);
 }
 
-.tool-icon {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--accent-color);
-  animation: nodePulse 2s infinite ease-in-out;
+.tool-button.upload::before {
+  content: '⬆️'; /* Ícone de upload */
+  font-size: 16px;
+  color: var(--primary-color);
 }
 
 .input-container {
@@ -908,6 +888,7 @@ body::before {
 .message-input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--focus-glow);
 }
 
 .attachments-area {
@@ -988,7 +969,6 @@ body::before {
   height: 12px;
   border-radius: 50%;
   background: var(--accent-color);
-  animation: nodePulse 2s infinite ease-in-out;
 }
 
 /* Lousa Modal */
@@ -1036,6 +1016,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-family: 'Sora', sans-serif;
 }
 
 .lousa-modal-actions {
@@ -1117,11 +1098,13 @@ body::before {
   resize: none;
   border: none;
   box-shadow: var(--shadow);
+  transition: all 0.3s ease;
 }
 
 .lousa-editor:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--focus-glow);
 }
 
 /* Penseira Modal */
@@ -1168,6 +1151,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-family: 'Sora', sans-serif;
 }
 
 .close-modal {
@@ -1257,9 +1241,8 @@ body::before {
 .menu-icon {
   width: 18px;
   height: 18px;
-  border-radius: 50%;
-  background: var(--accent-color);
-  animation: nodePulse 2s infinite ease-in-out;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6 L12 18 M12 18 L20 6 M4 6 L8 6 M16 18 L20 18" stroke="%237a7a7e" stroke-width="2" fill="none"/><circle cx="4" cy="6" r="2" fill="%237a7a7e"/><circle cx="20" cy="18" r="2" fill="%237a7a7e"/><circle cx="12" cy="18" r="2" fill="%237a7a7e"/></svg>') no-repeat center;
+  background-size: contain;
 }
 
 /* Animações */
@@ -1272,12 +1255,6 @@ body::before {
   0% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
   100% { transform: translateY(0); }
-}
-
-@keyframes nodePulse {
-  0% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.6; }
 }
 
 @keyframes sparkle {
@@ -1309,6 +1286,10 @@ body::before {
 .voice-selector:focus {
   background: var(--hover-color);
   transform: translateY(-2px);
+}
+
+.voice-selector:focus {
+  box-shadow: var(--focus-glow);
 }
 
 .voice-selector::after {
@@ -1707,6 +1688,7 @@ body::before {
     background: var(--glass-bg);
     font-size: 13px;
     box-shadow: var(--shadow);
+    transition: all 0.3s ease;
   }
 
   .advanced-toggle:hover {
@@ -1715,6 +1697,10 @@ body::before {
 
   .advanced-toggle.active {
     color: var(--primary-color);
+  }
+
+  .advanced-toggle:focus {
+    box-shadow: var(--focus-glow);
   }
 
   .user-menu {
@@ -1950,11 +1936,6 @@ body::before {
     gap: 6px;
   }
 
-  .tool-icon {
-    width: 14px;
-    height: 14px;
-  }
-
   .message-input {
     min-height: 50px;
     max-height: 200px;
@@ -2160,4 +2141,10 @@ body::before {
 /* Soft Transitions */
 .message, .conversation-item, .message-bubble, button, .tool-button {
   transition: all 0.3s ease;
+}
+
+/* Remove links azuis em mobile */
+a, a:hover, a:focus, a:active {
+  color: var(--text-color);
+  text-decoration: none;
 }
