@@ -85,7 +85,7 @@ body::before {
 }
 
 .logo {
-  display: block; /* Exibindo o logo até você adicionar o novo */
+  display: block;
   width: 32px;
   height: 32px;
 }
@@ -782,7 +782,7 @@ body::before {
 }
 
 .tool-button {
-  padding: 4px 8px; /* Adicionado padding para melhor clique */
+  padding: 4px 8px;
   border-radius: 12px;
   background: transparent;
   border: none;
@@ -1632,11 +1632,13 @@ body::before {
     height: 26px;
   }
 
-  .conversation-list, .projects-list {
+  .conversation-list,
+  .projects-list {
     padding: 12px;
   }
 
-  .conversation-item, .project-item {
+  .conversation-item,
+  .project-item {
     padding: 10px 14px;
     margin-bottom: 6px;
     gap: 10px;
@@ -1648,11 +1650,13 @@ body::before {
     font-size: 12px;
   }
 
-  .conversation-title, .project-title {
+  .conversation-title,
+  .project-title {
     font-size: 14px;
   }
 
-  .conversation-details, .project-details {
+  .conversation-details,
+  .project-details {
     font-size: 12px;
     gap: 6px;
     margin-top: 4px;
@@ -1967,58 +1971,57 @@ body::before {
     margin-bottom: 16px;
   }
 
-    /* Continuação dos ajustes para desktop */
-    .recording-animation {
-      height: 80px;
-      margin-bottom: 16px;
-    }
-
-    .recording-wave {
-      width: 4px;
-      height: 32px;
-      margin: 0 3px;
-    }
-
-    .recording-wave:nth-child(2) {
-      animation-delay: 0.2s;
-      height: 40px;
-    }
-
-    .recording-wave:nth-child(3) {
-      animation-delay: 0.4s;
-      height: 56px;
-    }
-
-    .recording-timer {
-      font-size: 24px;
-      margin-bottom: 16px;
-    }
-
-    .recording-controls {
-      gap: 12px;
-    }
-
-    .recording-controls button {
-      padding: 10px 0;
-      font-size: 14px;
-    }
+  .recording-animation {
+    height: 80px;
+    margin-bottom: 16px;
   }
 
-  /* Soft Transitions */
-  .message,
-  .conversation-item,
-  .message-bubble,
-  button,
-  .tool-button {
-    transition: all 0.3s ease;
+  .recording-wave {
+    width: 4px;
+    height: 32px;
+    margin: 0 3px;
   }
 
-  /* Removendo tooltips indesejados */
-  [title] {
-    tooltip: none; /* Desativando tooltips padrão */
+  .recording-wave:nth-child(2) {
+    animation-delay: 0.2s;
+    height: 40px;
   }
 
-  *:hover::after,
-  *:hover::before {
-    content: none !important; /* Removendo pseudo-elementos que podem causar tooltips */
+  .recording-wave:nth-child(3) {
+    animation-delay: 0.4s;
+    height: 56px;
   }
+
+  .recording-timer {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .recording-controls {
+    gap: 12px;
+  }
+
+  .recording-controls button {
+    padding: 10px 0;
+    font-size: 14px;
+  }
+}
+
+/* Soft Transitions */
+.message,
+.conversation-item,
+.message-bubble,
+button,
+.tool-button {
+  transition: all 0.3s ease;
+}
+
+/* Removendo tooltips indesejados */
+[title] {
+  tooltip: none; /* Desativando tooltips padrão */
+}
+
+*:hover::after,
+*:hover::before {
+  content: none !important; /* Removendo pseudo-elementos que podem causar tooltips */
+}
