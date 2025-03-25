@@ -18,7 +18,7 @@
     
     <div class="logo-container">
       <span class="logo">✦</span>
-      <span class="logo-text">VERILO.AI</span>
+      <span class="logo-text">VAV</span>
     </div>
     
     <!-- Desktop model selector -->
@@ -99,9 +99,9 @@
             <option value="nova" selected>voz suave</option>
           </select>
           
-          <button class="lousa-button" id="lousaButton">
-            <span class="lousa-icon">□</span>
-            lousa
+          <button class="canva-button" id="canvaButton">
+            <span class="canva-icon">□</span>
+            canva
           </button>
         </div>
       </div>
@@ -132,14 +132,14 @@
             </button>
           </div>
           
-          <button class="tool-button whisper" id="whisperBtn">
+          <button class="tool-button talk" id="talkBtn">
             <span class="tool-icon">○</span>
-            whisper
+            talk
           </button>
         </div>
         
         <div class="input-container">
-          <textarea class="message-input" id="messageInput" placeholder="digite sua mensagem ou use o whisper para falar..."></textarea>
+          <textarea class="message-input" id="messageInput" placeholder="digite sua mensagem ou use o talk para falar..."></textarea>
           <button class="send-button" id="sendBtn">
             <span class="send-icon">→</span>
           </button>
@@ -152,33 +152,33 @@
     </div>
   </div>
   
-  <!-- Lousa Modal -->
-  <div class="lousa-modal" id="lousaModal">
-    <div class="lousa-modal-content">
-      <div class="lousa-modal-header">
-        <div class="lousa-modal-title">
-          <span class="lousa-icon">□</span>
-          lousa
+  <!-- Canva Modal -->
+  <div class="canva-modal" id="canvaModal">
+    <div class="canva-modal-content">
+      <div class="canva-modal-header">
+        <div class="canva-modal-title">
+          <span class="canva-icon">□</span>
+          canva
         </div>
         
-        <div class="lousa-modal-actions">
-          <button class="lousa-modal-action" id="lousaCodeBtn">
-            <span class="lousa-action-icon">⌈⌋</span>
+        <div class="canva-modal-actions">
+          <button class="canva-modal-action" id="canvaCodeBtn">
+            <span class="canva-action-icon">⌈⌋</span>
             código
           </button>
-          <button class="lousa-modal-action save" id="lousaSaveBtn">
-            <span class="lousa-action-icon">↓</span>
+          <button class="canva-modal-action save" id="canvaSaveBtn">
+            <span class="canva-action-icon">↓</span>
             salvar
           </button>
         </div>
         
-        <div class="lousa-modal-close" id="closeLousaModal">
+        <div class="canva-modal-close" id="closeCanvaModal">
           <span class="close-icon">×</span>
         </div>
       </div>
       
-      <div class="lousa-modal-body">
-        <textarea class="lousa-editor" id="lousaEditor" placeholder="digite ou cole seu conteúdo aqui..."></textarea>
+      <div class="canva-modal-body">
+        <textarea class="canva-editor" id="canvaEditor" placeholder="digite ou cole seu conteúdo aqui..."></textarea>
       </div>
     </div>
   </div>
@@ -237,13 +237,13 @@
     const fileInput = document.getElementById('fileInput');
     const cameraInput = document.getElementById('cameraInput');
     const galleryInput = document.getElementById('galleryInput');
-    const lousaButton = document.getElementById('lousaButton');
-    const lousaModal = document.getElementById('lousaModal');
-    const closeLousaModal = document.getElementById('closeLousaModal');
+    const canvaButton = document.getElementById('canvaButton');
+    const canvaModal = document.getElementById('canvaModal');
+    const closeCanvaModal = document.getElementById('closeCanvaModal');
     const penseiraButton = document.querySelector('.penseira-button');
     const penseiraModal = document.getElementById('penseiraModal');
     const closePenseiraModal = document.getElementById('closePenseiraModal');
-    const whisperBtn = document.getElementById('whisperBtn');
+    const talkBtn = document.getElementById('talkBtn');
     const recordingModal = document.getElementById('recordingModal');
     const recordingStopBtn = document.getElementById('recordingStopBtn');
     const recordingCancelBtn = document.getElementById('recordingCancelBtn');
@@ -276,13 +276,13 @@
       }
     });
 
-    // Modal de lousa
-    lousaButton.addEventListener('click', () => {
-      gsap.to(lousaModal, { autoAlpha: 1, display: 'flex', duration: 0.3 });
+    // Modal de canva
+    canvaButton.addEventListener('click', () => {
+      gsap.to(canvaModal, { autoAlpha: 1, display: 'flex', duration: 0.3 });
     });
 
-    closeLousaModal.addEventListener('click', () => {
-      gsap.to(lousaModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
+    closeCanvaModal.addEventListener('click', () => {
+      gsap.to(canvaModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
     });
 
     // Modal de memória (penseira)
@@ -295,7 +295,7 @@
     });
 
     // Modal de gravação
-    whisperBtn.addEventListener('click', () => {
+    talkBtn.addEventListener('click', () => {
       gsap.to(recordingModal, { autoAlpha: 1, display: 'flex', duration: 0.3 });
     });
 
