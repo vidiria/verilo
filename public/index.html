@@ -6,6 +6,8 @@
   <title>VAV</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Adicionando GSAP para animações mais suaves -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -16,7 +18,7 @@
     
     <div class="logo-container">
       <span class="logo">✦</span>
-      <span class="logo-text">VAV</span>
+      <span class="logo-text">VERILO.AI</span>
     </div>
     
     <!-- Desktop model selector -->
@@ -76,7 +78,7 @@
       </button>
       
       <button class="penseira-button">
-        <span class="penseira-icon">🗣️</span>
+        <span class="penseira-icon">~</span>
         memória
       </button>
     </div>
@@ -99,7 +101,7 @@
           
           <button class="lousa-button" id="lousaButton">
             <span class="lousa-icon">□</span>
-            canva
+            lousa
           </button>
         </div>
       </div>
@@ -111,35 +113,35 @@
       <div class="input-area">
         <div class="input-tools">
           <button class="tool-button attach-btn" id="attachBtn">
-            <span class="tool-icon">📎</span>
+            <span class="tool-icon">+</span>
             anexar
           </button>
           
           <div class="attach-menu" id="attachMenu">
             <button class="attach-option" id="fileOption">
-              <span class="tool-icon">📄</span>
+              <span class="tool-icon">↑</span>
               anexar arquivo
             </button>
             <button class="attach-option" id="cameraOption">
-              <span class="tool-icon">📸</span>
+              <span class="tool-icon">◉</span>
               tirar foto
             </button>
             <button class="attach-option" id="galleryOption">
-              <span class="tool-icon">🖼️</span>
+              <span class="tool-icon">▢</span>
               galeria
             </button>
           </div>
           
           <button class="tool-button whisper" id="whisperBtn">
-            <span class="tool-icon">🎙️</span>
-            talk
+            <span class="tool-icon">○</span>
+            whisper
           </button>
         </div>
         
         <div class="input-container">
-          <textarea class="message-input" id="messageInput" placeholder="digite sua mensagem ou use o talk para falar..."></textarea>
+          <textarea class="message-input" id="messageInput" placeholder="digite sua mensagem ou use o whisper para falar..."></textarea>
           <button class="send-button" id="sendBtn">
-            <span class="send-icon">➤</span>
+            <span class="send-icon">→</span>
           </button>
         </div>
         
@@ -150,22 +152,22 @@
     </div>
   </div>
   
-  <!-- Canva Modal -->
+  <!-- Lousa Modal -->
   <div class="lousa-modal" id="lousaModal">
     <div class="lousa-modal-content">
       <div class="lousa-modal-header">
         <div class="lousa-modal-title">
           <span class="lousa-icon">□</span>
-          canva
+          lousa
         </div>
         
         <div class="lousa-modal-actions">
           <button class="lousa-modal-action" id="lousaCodeBtn">
-            <span class="lousa-action-icon">⌨️</span>
+            <span class="lousa-action-icon">⌈⌋</span>
             código
           </button>
           <button class="lousa-modal-action save" id="lousaSaveBtn">
-            <span class="lousa-action-icon">💾</span>
+            <span class="lousa-action-icon">↓</span>
             salvar
           </button>
         </div>
@@ -186,7 +188,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title">
-          <span class="penseira-icon">🗣️</span>
+          <span class="penseira-icon">~</span>
           memória
         </div>
         <div class="close-modal" id="closePenseiraModal">
@@ -226,7 +228,7 @@
   
   <!-- Scripts -->
   <script>
-    // JavaScript para abrir/fechar modais e menu flutuante
+    // JavaScript para abrir/fechar modais, menu flutuante e sidebar
     const attachBtn = document.getElementById('attachBtn');
     const attachMenu = document.getElementById('attachMenu');
     const fileOption = document.getElementById('fileOption');
@@ -274,40 +276,55 @@
       }
     });
 
-    // Modal de lousa (canva)
+    // Modal de lousa
     lousaButton.addEventListener('click', () => {
-      lousaModal.classList.add('open');
+      gsap.to(lousaModal, { autoAlpha: 1, display: 'flex', duration: 0.3 });
     });
 
     closeLousaModal.addEventListener('click', () => {
-      lousaModal.classList.remove('open');
+      gsap.to(lousaModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
     });
 
     // Modal de memória (penseira)
     penseiraButton.addEventListener('click', () => {
-      penseiraModal.classList.add('open');
+      gsap.to(penseiraModal, { autoAlpha: 1, display: 'flex', duration: 0.3 });
     });
 
     closePenseiraModal.addEventListener('click', () => {
-      penseiraModal.classList.remove('open');
+      gsap.to(penseiraModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
     });
 
     // Modal de gravação
     whisperBtn.addEventListener('click', () => {
-      recordingModal.classList.add('active');
+      gsap.to(recordingModal, { autoAlpha: 1, display: 'flex', duration: 0.3 });
     });
 
     recordingStopBtn.addEventListener('click', () => {
-      recordingModal.classList.remove('active');
+      gsap.to(recordingModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
     });
 
     recordingCancelBtn.addEventListener('click', () => {
-      recordingModal.classList.remove('active');
+      gsap.to(recordingModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
     });
 
     // Sidebar no mobile
     mobileMenuButton.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+      const isOpen = sidebar.classList.contains('open');
+      if (isOpen) {
+        gsap.to(sidebar, { x: '-100%', duration: 0.5, ease: 'power2.inOut' });
+        sidebar.classList.remove('open');
+      } else {
+        gsap.to(sidebar, { x: '0%', duration: 0.5, ease: 'power2.inOut' });
+        sidebar.classList.add('open');
+      }
+    });
+
+    // Fechar sidebar ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && !mobileMenuButton.contains(e.target) && sidebar.classList.contains('open')) {
+        gsap.to(sidebar, { x: '-100%', duration: 0.5, ease: 'power2.inOut' });
+        sidebar.classList.remove('open');
+      }
     });
   </script>
 </body>
