@@ -31,10 +31,6 @@
       <option value="claude-3-7-sonnet" selected>claude 3.7</option>
     </select>
     
-    <button class="advanced-toggle active" id="advancedToggle">
-      <span>think+</span>
-    </button>
-    
     <div class="user-menu">
       <div class="user-avatar">J</div>
     </div>
@@ -136,6 +132,11 @@
             <span class="tool-icon">○</span>
             talk
           </button>
+          
+          <button class="tool-button advanced-toggle active" id="advancedToggle">
+            <span class="advanced-icon">⧖</span>
+            think+
+          </button>
         </div>
         
         <div class="input-container">
@@ -143,6 +144,13 @@
           <button class="send-button" id="sendBtn">
             <span class="send-icon">→</span>
           </button>
+        </div>
+        
+        <div class="processing-audio" id="processingAudio">
+          <span class="processing-text">processando áudio...</span>
+          <div class="processing-wave"></div>
+          <div class="processing-wave"></div>
+          <div class="processing-wave"></div>
         </div>
         
         <div class="attachments-area" id="attachmentsArea">
@@ -213,7 +221,7 @@
         <div class="recording-wave"></div>
         <div class="recording-wave"></div>
       </div>
-      <div class="recording-timer">0:00</div>
+      <div class="recording-timer" id="recordingTimer">0:00</div>
       <div class="recording-controls">
         <button id="recordingStopBtn" class="recording-stop-btn">concluir</button>
         <button id="recordingCancelBtn" class="recording-cancel-btn">cancelar</button>
@@ -228,7 +236,7 @@
   
   <!-- Scripts -->
   <script>
-    // JavaScript para abrir/fechar modais, menu flutuante e sidebar
+    // JavaScript para abrir/fechar modais, menu flutuante, sidebar e animações
     const attachBtn = document.getElementById('attachBtn');
     const attachMenu = document.getElementById('attachMenu');
     const fileOption = document.getElementById('fileOption');
@@ -249,6 +257,11 @@
     const recordingCancelBtn = document.getElementById('recordingCancelBtn');
     const mobileMenuButton = document.getElementById('mobileMenuButton');
     const sidebar = document.getElementById('sidebar');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const messagesContainer = document.getElementById('messagesContainer');
+    const recordingTimer = document.getElementById('recordingTimer');
+    const processingAudio = document.getElementById('processingAudio');
 
     // Menu flutuante de anexar
     attachBtn.addEventListener('click', () => {
@@ -294,17 +307,39 @@
       gsap.to(penseiraModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
     });
 
-    // Modal de gravação
+    // Modal de gravação com temporizador
+    let recordingTime = 0;
+    let timerInterval;
+
     talkBtn.addEventListener('click', () => {
       gsap.to(recordingModal, { autoAlpha: 1, display: 'flex', duration: 0.3 });
+      recordingTime = 0;
+      recordingTimer.textContent = '0:00';
+      timerInterval = setInterval(() => {
+        recordingTime++;
+        const minutes = Math.floor(recordingTime / 60);
+        const seconds = recordingTime % 60;
+        recordingTimer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      }, 1000);
     });
 
     recordingStopBtn.addEventListener('click', () => {
       gsap.to(recordingModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
+      clearInterval(timerInterval);
+      // Simula o processamento de áudio
+      gsap.to(processingAudio, { autoAlpha: 1, display: 'block', duration: 0.3 });
+      setTimeout(() => {
+        gsap.to(processingAudio, { autoAlpha: 0, display: 'none', duration: 0.3 });
+        // Simula a transcrição e adiciona mensagem
+        const transcribedMessage = "Mensagem transcrita do áudio...";
+        addMessage(transcribedMessage, 'user');
+        simulateAssistantResponse();
+      }, 2000);
     });
 
     recordingCancelBtn.addEventListener('click', () => {
       gsap.to(recordingModal, { autoAlpha: 0, display: 'none', duration: 0.3 });
+      clearInterval(timerInterval);
     });
 
     // Sidebar no mobile
@@ -326,6 +361,60 @@
         sidebar.classList.remove('open');
       }
     });
+
+    // Enviar mensagem
+    sendBtn.addEventListener('click', () => {
+      const messageText = messageInput.value.trim();
+      if (messageText) {
+        addMessage(messageText, 'user');
+        messageInput.value = '';
+        simulateAssistantResponse();
+      }
+    });
+
+    messageInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendBtn.click();
+      }
+    });
+
+    // Função para adicionar mensagem com animação
+    function addMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      messageDiv.innerHTML = `
+        <div class="message-header">
+          <div class="message-avatar">${sender === 'user' ? 'V' : 'A'}</div>
+          <div class="message-meta">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+        </div>
+        <div class="message-bubble">
+          <div class="message-content">${text}</div>
+        </div>
+      `;
+      messagesContainer.appendChild(messageDiv);
+      gsap.from(messageDiv, { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' });
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Simulação de resposta do assistente com efeito de digitação
+    function simulateAssistantResponse() {
+      const typingIndicator = document.createElement('div');
+      typingIndicator.classList.add('typing-indicator');
+      typingIndicator.innerHTML = `
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      `;
+      messagesContainer.appendChild(typingIndicator);
+      gsap.from(typingIndicator, { opacity: 0, duration: 0.3 });
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      setTimeout(() => {
+        typingIndicator.remove();
+        addMessage("Oi! Sou o VAV, seu assistente de IA integrado. Estou pronto para ajudar com perguntas, escrita, análise de dados, programação e muito mais. Como posso ajudar você hoje?", 'assistant');
+      }, 1500);
+    }
   </script>
 </body>
 </html>
