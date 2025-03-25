@@ -11,31 +11,25 @@
   <!-- Header -->
   <header class="header">
     <button class="mobile-menu-button" id="mobileMenuButton">
-      <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 12h18M3 6h18M3 18h18"></path>
-      </svg>
+      <span class="menu-icon">≡</span>
     </button>
     
     <div class="logo-container">
-      <img src="img/logo.png" alt="logo VAV" class="logo">
+      <span class="logo">✦</span>
       <span class="logo-text">VAV</span>
     </div>
     
-    <!-- Desktop model selector - Apenas o Claude -->
+    <!-- Desktop model selector -->
     <div class="models-selector desktop-only">
       <button class="model-button active" data-model="claude-3-7-sonnet">claude 3.7</button>
     </div>
     
-    <!-- Mobile model selector - Apenas o Claude -->
+    <!-- Mobile model selector -->
     <select class="model-dropdown mobile-only" id="mobileModelSelect">
       <option value="claude-3-7-sonnet" selected>claude 3.7</option>
     </select>
     
     <button class="advanced-toggle active" id="advancedToggle">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M12 8v4M12 16h.01"></path>
-      </svg>
       <span>think+</span>
     </button>
     
@@ -51,9 +45,7 @@
       <div class="sidebar-header">
         <div class="sidebar-title">organização</div>
         <div class="sidebar-action">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 6v12M6 12h12"></path>
-          </svg>
+          <span class="sidebar-action-icon">+</span>
         </div>
       </div>
       
@@ -63,12 +55,30 @@
       </div>
       
       <div class="conversation-list active" id="conversationsList">
-        <!-- Conversas serão adicionadas dinamicamente aqui -->
+        <div class="conversation-item active">
+          <div class="conversation-icon">C</div>
+          <div class="conversation-content">
+            <div class="conversation-title">+conversa</div>
+            <div class="conversation-details">
+              <span class="model-tag">claude 3.7</span>
+            </div>
+          </div>
+        </div>
       </div>
       
       <div class="projects-list" id="projectsList">
         <!-- Projetos serão adicionados dinamicamente aqui -->
       </div>
+      
+      <button class="new-chat-btn">
+        <span class="new-chat-icon">+</span>
+        nova conversa
+      </button>
+      
+      <button class="penseira-button">
+        <span class="penseira-icon">🗣️</span>
+        memória
+      </button>
     </div>
     
     <!-- Chat Area -->
@@ -88,10 +98,7 @@
           </select>
           
           <button class="lousa-button" id="lousaButton">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="9" y1="3" x2="9" y2="21"></line>
-            </svg>
+            <span class="lousa-icon">□</span>
             canva
           </button>
         </div>
@@ -104,43 +111,27 @@
       <div class="input-area">
         <div class="input-tools">
           <button class="tool-button attach-btn" id="attachBtn">
-            <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
-            </svg>
+            <span class="tool-icon">📎</span>
             anexar
           </button>
           
           <div class="attach-menu" id="attachMenu">
             <button class="attach-option" id="fileOption">
-              <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
-              </svg>
+              <span class="tool-icon">📄</span>
               anexar arquivo
             </button>
             <button class="attach-option" id="cameraOption">
-              <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                <circle cx="12" cy="13" r="4"></circle>
-              </svg>
+              <span class="tool-icon">📸</span>
               tirar foto
             </button>
             <button class="attach-option" id="galleryOption">
-              <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                <polyline points="21 15 16 10 5 21"></polyline>
-              </svg>
+              <span class="tool-icon">🖼️</span>
               galeria
             </button>
           </div>
           
           <button class="tool-button whisper" id="whisperBtn">
-            <svg class="tool-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-              <line x1="12" y1="19" x2="12" y2="23"></line>
-              <line x1="8" y1="23" x2="16" y2="23"></line>
-            </svg>
+            <span class="tool-icon">🎙️</span>
             talk
           </button>
         </div>
@@ -148,10 +139,7 @@
         <div class="input-container">
           <textarea class="message-input" id="messageInput" placeholder="digite sua mensagem ou use o talk para falar..."></textarea>
           <button class="send-button" id="sendBtn">
-            <svg class="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M22 2L11 13"></path>
-              <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
-            </svg>
+            <span class="send-icon">➤</span>
           </button>
         </div>
         
@@ -167,44 +155,49 @@
     <div class="lousa-modal-content">
       <div class="lousa-modal-header">
         <div class="lousa-modal-title">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-          </svg>
+          <span class="lousa-icon">□</span>
           canva
         </div>
         
         <div class="lousa-modal-actions">
           <button class="lousa-modal-action" id="lousaCodeBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
+            <span class="lousa-action-icon">⌨️</span>
             código
           </button>
           <button class="lousa-modal-action save" id="lousaSaveBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-              <polyline points="17 21 17 13 7 13 7 21"></polyline>
-              <polyline points="7 3 7 8 15 8"></polyline>
-            </svg>
+            <span class="lousa-action-icon">💾</span>
             salvar
           </button>
         </div>
         
         <div class="lousa-modal-close" id="closeLousaModal">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+          <span class="close-icon">×</span>
         </div>
       </div>
       
       <div class="lousa-modal-body">
         <textarea class="lousa-editor" id="lousaEditor" placeholder="digite ou cole seu conteúdo aqui..."></textarea>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Penseira Modal -->
+  <div class="penseira-modal" id="penseiraModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="penseira-icon">🗣️</span>
+          memória
+        </div>
+        <div class="close-modal" id="closePenseiraModal">
+          <span class="close-icon">×</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="memory-card">
+          <div class="memory-title">conversa inicial</div>
+          <div class="memory-content">você perguntou sobre o universo...</div>
+        </div>
       </div>
     </div>
   </div>
@@ -232,11 +225,8 @@
   <input type="file" id="galleryInput" accept="image/*" style="display: none;">
   
   <!-- Scripts -->
-  <script src="js/ui.js"></script>
-  <script src="js/chat.js"></script>
-  <script src="js/app.js"></script>
   <script>
-    // JavaScript para o menu flutuante de anexar
+    // JavaScript para abrir/fechar modais e menu flutuante
     const attachBtn = document.getElementById('attachBtn');
     const attachMenu = document.getElementById('attachMenu');
     const fileOption = document.getElementById('fileOption');
@@ -245,7 +235,20 @@
     const fileInput = document.getElementById('fileInput');
     const cameraInput = document.getElementById('cameraInput');
     const galleryInput = document.getElementById('galleryInput');
+    const lousaButton = document.getElementById('lousaButton');
+    const lousaModal = document.getElementById('lousaModal');
+    const closeLousaModal = document.getElementById('closeLousaModal');
+    const penseiraButton = document.querySelector('.penseira-button');
+    const penseiraModal = document.getElementById('penseiraModal');
+    const closePenseiraModal = document.getElementById('closePenseiraModal');
+    const whisperBtn = document.getElementById('whisperBtn');
+    const recordingModal = document.getElementById('recordingModal');
+    const recordingStopBtn = document.getElementById('recordingStopBtn');
+    const recordingCancelBtn = document.getElementById('recordingCancelBtn');
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const sidebar = document.getElementById('sidebar');
 
+    // Menu flutuante de anexar
     attachBtn.addEventListener('click', () => {
       attachMenu.classList.toggle('open');
     });
@@ -265,13 +268,47 @@
       attachMenu.classList.remove('open');
     });
 
-    // Fechar o menu flutuante ao clicar fora
     document.addEventListener('click', (e) => {
       if (!attachBtn.contains(e.target) && !attachMenu.contains(e.target)) {
         attachMenu.classList.remove('open');
       }
     });
+
+    // Modal de lousa (canva)
+    lousaButton.addEventListener('click', () => {
+      lousaModal.classList.add('open');
+    });
+
+    closeLousaModal.addEventListener('click', () => {
+      lousaModal.classList.remove('open');
+    });
+
+    // Modal de memória (penseira)
+    penseiraButton.addEventListener('click', () => {
+      penseiraModal.classList.add('open');
+    });
+
+    closePenseiraModal.addEventListener('click', () => {
+      penseiraModal.classList.remove('open');
+    });
+
+    // Modal de gravação
+    whisperBtn.addEventListener('click', () => {
+      recordingModal.classList.add('active');
+    });
+
+    recordingStopBtn.addEventListener('click', () => {
+      recordingModal.classList.remove('active');
+    });
+
+    recordingCancelBtn.addEventListener('click', () => {
+      recordingModal.classList.remove('active');
+    });
+
+    // Sidebar no mobile
+    mobileMenuButton.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
   </script>
-  
 </body>
 </html>
