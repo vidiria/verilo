@@ -499,7 +499,7 @@ body::before {
   gap: 6px;
 }
 
-.lousa-button {
+.canva-button {
   padding: 4px 8px;
   border-radius: 12px;
   background: var(--glass-bg);
@@ -512,17 +512,17 @@ body::before {
   transition: all 0.3s ease;
 }
 
-.lousa-button:hover {
+.canva-button:hover {
   background: var(--hover-color);
   transform: translateY(-2px);
   box-shadow: var(--glow);
 }
 
-.lousa-button:focus {
+.canva-button:focus {
   box-shadow: var(--outline-focus);
 }
 
-.lousa-icon {
+.canva-icon {
   font-size: 16px;
 }
 
@@ -662,7 +662,7 @@ body::before {
   color: var(--text-secondary);
 }
 
-/* Artifact/Lousa */
+/* Artifact/Canva */
 .artifact {
   margin-top: 6px;
   border-radius: 14px;
@@ -911,8 +911,8 @@ body::before {
   font-size: 16px;
 }
 
-/* Lousa Modal */
-.lousa-modal {
+/* Canva Modal */
+.canva-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -926,11 +926,11 @@ body::before {
   opacity: 0;
 }
 
-.lousa-modal.open {
+.canva-modal.open {
   display: flex;
 }
 
-.lousa-modal-content {
+.canva-modal-content {
   width: 90%;
   max-width: 500px;
   height: 80%;
@@ -944,14 +944,14 @@ body::before {
   flex-direction: column;
 }
 
-.lousa-modal-header {
+.canva-modal-header {
   padding: 8px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.lousa-modal-title {
+.canva-modal-title {
   font-size: 14px;
   font-weight: 600;
   display: flex;
@@ -960,12 +960,12 @@ body::before {
   font-family: 'Sora', sans-serif;
 }
 
-.lousa-modal-actions {
+.canva-modal-actions {
   display: flex;
   gap: 6px;
 }
 
-.lousa-modal-action {
+.canva-modal-action {
   padding: 4px 8px;
   border-radius: 12px;
   background: transparent;
@@ -977,20 +977,20 @@ body::before {
   transition: all 0.3s ease;
 }
 
-.lousa-modal-action:hover {
+.canva-modal-action:hover {
   filter: brightness(1.2);
   box-shadow: var(--glow);
 }
 
-.lousa-modal-action:focus {
+.canva-modal-action:focus {
   box-shadow: var(--outline-focus);
 }
 
-.lousa-action-icon {
+.canva-action-icon {
   font-size: 16px;
 }
 
-.lousa-modal-close {
+.canva-modal-close {
   width: 24px;
   height: 24px;
   border-radius: 8px;
@@ -1001,12 +1001,12 @@ body::before {
   transition: all 0.3s ease;
 }
 
-.lousa-modal-close:hover {
+.canva-modal-close:hover {
   filter: brightness(1.2);
   box-shadow: var(--glow);
 }
 
-.lousa-modal-close:focus {
+.canva-modal-close:focus {
   box-shadow: var(--outline-focus);
 }
 
@@ -1014,13 +1014,13 @@ body::before {
   font-size: 20px;
 }
 
-.lousa-modal-body {
+.canva-modal-body {
   flex: 1;
   padding: 12px;
   overflow-y: auto;
 }
 
-.lousa-editor {
+.canva-editor {
   width: 100%;
   height: 100%;
   border-radius: 14px;
@@ -1037,7 +1037,7 @@ body::before {
   transition: all 0.3s ease;
 }
 
-.lousa-editor:focus {
+.canva-editor:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: var(--outline-focus);
@@ -1436,7 +1436,7 @@ body::before {
     gap: 8px;
   }
 
-  .lousa-button {
+  .canva-button {
     padding: 6px 12px;
     gap: 6px;
   }
@@ -1565,36 +1565,36 @@ body::before {
     height: 28px;
   }
 
-  .lousa-modal-content {
+  .canva-modal-content {
     max-width: 800px;
     height: 90%;
     max-height: 600px;
   }
 
-  .lousa-modal-header {
+  .canva-modal-header {
     padding: 12px 16px;
   }
 
-  .lousa-modal-title {
+  .canva-modal-title {
     font-size: 16px;
     gap: 8px;
   }
 
-  .lousa-modal-action {
+  .canva-modal-action {
     padding: 6px 12px;
     gap: 6px;
   }
 
-  .lousa-modal-close {
+  .canva-modal-close {
     width: 28px;
     height: 28px;
   }
 
-  .lousa-modal-body {
+  .canva-modal-body {
     padding: 16px;
   }
 
-  .lousa-editor {
+  .canva-editor {
     padding: 12px;
     font-size: 14px;
   }
